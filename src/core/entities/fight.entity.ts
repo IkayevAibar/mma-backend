@@ -1,11 +1,6 @@
+import { FightResultType } from 'src/shared/enums/fight-result.enum';
 import { FightEvent } from './fight-event.entity';
 import { Fighter } from './fighter.entity';
-
-export enum FightResultType {
-  KO = 'KO',
-  Submission = 'Submission',
-  Decision = 'Decision',
-}
 
 export class Fight {
   constructor(

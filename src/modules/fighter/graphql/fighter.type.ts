@@ -1,5 +1,5 @@
 import { ObjectType, Field, ID, Int } from '@nestjs/graphql';
-import { WeightClass } from 'src/core/entities/enums/weight-class.enum';
+import { WeightClass } from 'src/shared/enums/weight-class.enum';
 
 @ObjectType('Fighter')
 export class FighterType {

@@ -1,6 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { FighterOrm } from './fighter.orm';
-import { WeightClass } from 'src/core/entities/enums/weight-class.enum';
+import { WeightClass } from 'src/shared/enums/weight-class.enum';
 
 @Entity('rankings')
 export class RankingOrm {

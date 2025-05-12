@@ -1,31 +1,31 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { FightEventOrm } from './fight-event.orm';
 import { FighterOrm } from './fighter.orm';
-import { FightResultType } from '../../../core/entities/fight.entity';
+import { FightResultType } from 'src/shared/enums/fight-result.enum';
 
 @Entity('fights')
 export class FightOrm {
   @PrimaryGeneratedColumn('uuid') id: string;
 
-  @ManyToOne(() => FightEventOrm)
-  event: FightEventOrm;
+  @ManyToOne(() => FightEventOrm, { eager: true })
+  event!: FightEventOrm;
 
-  @ManyToOne(() => FighterOrm)
-  fighterA: FighterOrm;
+  @ManyToOne(() => FighterOrm, { eager: true })
+  fighterA!: FighterOrm;
 
-  @ManyToOne(() => FighterOrm)
-  fighterB: FighterOrm;
+  @ManyToOne(() => FighterOrm, { eager: true })
+  fighterB!: FighterOrm;
 
-  @ManyToOne(() => FighterOrm, { nullable: true })
-  winner: FighterOrm | null;
+  @ManyToOne(() => FighterOrm, { eager: true, nullable: true })
+  winner!: FighterOrm | null;
 
   @Column({
     type: 'enum',
     enum: FightResultType,
   })
-  method: FightResultType;
+  method!: FightResultType;
 
-  @Column() round: number;
+  @Column() round!: number;
 
-  @Column() time: string;
+  @Column() time!: string;
 }

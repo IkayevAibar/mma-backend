@@ -3,6 +3,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { FighterModule } from './modules/fighter/fighter.module';
+import { FightEventModule } from './modules/fight-event/fight-event.module';
+import { FightModule } from './modules/fight/fight.module';
+import { RankingService } from './modules/ranking/ranking.service';
+import { RankingResolver } from './modules/ranking/ranking.resolver';
+import { RankingModule } from './modules/ranking/ranking.module';
 
 @Module({
   imports: [
@@ -21,6 +26,10 @@ import { FighterModule } from './modules/fighter/fighter.module';
       playground: true,
     }),
     FighterModule,
+    FightEventModule,
+    FightModule,
+    RankingModule,
   ],
+  providers: [RankingService, RankingResolver],
 })
 export class AppModule {}

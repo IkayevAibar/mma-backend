@@ -1,18 +1,19 @@
-import { WeightClass } from 'src/core/entities/enums/weight-class.enum';
+import { WeightClass } from 'src/shared/enums/weight-class.enum';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('fighters')
-export class FighterOrm {
-  @PrimaryGeneratedColumn('uuid') id: string;
+@Entity('fights')
+export class FightOrm {
+  @PrimaryGeneratedColumn('uuid') id!: string;
 
-  @Column() firstName: string;
-  @Column() lastName: string;
+  @ManyToOne(() => EventOrm, { eager: true }) event!: EventOrm;
 
-  @Column({
-    type: 'enum',
-    enum: WeightClass,
-  })
-  weightClass: WeightClass;
+  @ManyToOne(() => FighterOrm, { eager: true }) fighterA!: FighterOrm;
+  @ManyToOne(() => FighterOrm, { eager: true }) fighterB!: FighterOrm;
 
-  @Column({ type: 'date' }) birthDate: Date;
+  @ManyToOne(() => FighterOrm, { eager: true, nullable: true })
+  winner?: FighterOrm | null;
+
+  @Column({ type: 'enum', enum: FightResultType }) method!: FightResultType;
+  @Column() round!: number;
+  @Column() time!: string;
 }

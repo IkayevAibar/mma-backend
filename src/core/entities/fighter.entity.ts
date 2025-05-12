@@ -1,4 +1,4 @@
-import { WeightClass } from './enums/weight-class.enum';
+import { WeightClass } from '../../shared/enums/weight-class.enum';
 
 export class Fighter {
   constructor(
