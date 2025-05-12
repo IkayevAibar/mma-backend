@@ -18,8 +18,10 @@ import { RankingModule } from './modules/ranking/ranking.module';
       username: process.env.DB_USER,
       password: process.env.DB_PASS,
       database: process.env.DB_NAME,
+      entities: [__dirname + '/**/*.orm.{ts,js}'],
       synchronize: false,
       autoLoadEntities: true,
+      migrations: [__dirname + '/migrations/*.{ts,js}'],
     }),
     GraphQLModule.forRoot({
       autoSchemaFile: join(process.cwd(), 'schema.gql'),
