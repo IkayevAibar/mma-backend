@@ -1,4 +1,5 @@
-import { Fighter, WeightClass } from './fighter.entity';
+import { WeightClass } from './enums/weight-class.enum';
+import { Fighter } from './fighter.entity';
 
 export class Ranking {
   constructor(

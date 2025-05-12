@@ -1,5 +1,5 @@
+import { WeightClass } from 'src/core/entities/enums/weight-class.enum';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { WeightClass } from '../../../core/entities/fighter.entity';
 
 @Entity('fighters')
 export class FighterOrm {

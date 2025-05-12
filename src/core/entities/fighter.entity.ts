@@ -1,8 +1,4 @@
-export enum WeightClass {
-  FLYWEIGHT = 'Flyweight',
-  BANTAMWEIGHT = 'Bantamweight',
-  FEATHERWEIGHT = 'Featherweight',
-}
+import { WeightClass } from './enums/weight-class.enum';
 
 export class Fighter {
   constructor(

@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
+import { FighterModule } from './modules/fighter/fighter.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { join } from 'path';
       autoSchemaFile: join(process.cwd(), 'schema.gql'),
       playground: true,
     }),
+    FighterModule,
   ],
 })
 export class AppModule {}
