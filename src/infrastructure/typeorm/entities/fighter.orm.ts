@@ -1,19 +1,23 @@
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 import { WeightClass } from 'src/shared/enums/weight-class.enum';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('fights')
-export class FightOrm {
-  @PrimaryGeneratedColumn('uuid') id!: string;
+@Entity('fighters')
+export class FighterOrm {
+  @PrimaryGeneratedColumn('uuid')
+  id!: string;
 
-  @ManyToOne(() => EventOrm, { eager: true }) event!: EventOrm;
+  @Column() firstName!: string;
+  @Column() lastName!: string;
 
-  @ManyToOne(() => FighterOrm, { eager: true }) fighterA!: FighterOrm;
-  @ManyToOne(() => FighterOrm, { eager: true }) fighterB!: FighterOrm;
+  @Column({ nullable: true }) nickname?: string;
 
-  @ManyToOne(() => FighterOrm, { eager: true, nullable: true })
-  winner?: FighterOrm | null;
+  @Column({ type: 'date' }) birthDate!: Date;
+  @Column() country!: string;
 
-  @Column({ type: 'enum', enum: FightResultType }) method!: FightResultType;
-  @Column() round!: number;
-  @Column() time!: string;
+  @Column({ type: 'enum', enum: WeightClass })
+  weightClass!: WeightClass;
+
+  @Column({ type: 'int', nullable: true }) heightCm?: number;
+  @Column({ type: 'int', nullable: true }) reachCm?: number;
+  @Column({ nullable: true }) gym?: string;
 }

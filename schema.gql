@@ -1,0 +1,113 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Fighter {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  nickname: String
+  birthDate: DateTime!
+  country: String!
+  weightClass: WeightClass!
+  heightCm: Int
+  reachCm: Int
+  gym: String
+  wins: Int!
+  losses: Int!
+  draws: Int!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+enum WeightClass {
+  FLYWEIGHT
+  BANTAMWEIGHT
+  FEATHERWEIGHT
+  LIGHTWEIGHT
+  WELTERWEIGHT
+  MIDDLEWEIGHT
+  LIGHT_HEAVYWEIGHT
+  HEAVYWEIGHT
+}
+
+type FightEvent {
+  id: ID!
+  name: String!
+  location: String!
+  date: DateTime!
+  fights: [Fight!]!
+}
+
+type Fight {
+  id: ID!
+  event: FightEvent!
+  fighterA: Fighter!
+  fighterB: Fighter!
+  winner: Fighter
+  method: FightResultType!
+  round: Int!
+  time: String!
+  fights: [Fight!]!
+}
+
+enum FightResultType {
+  KO
+  SUBMISSION
+  DECISION
+}
+
+type Ranking {
+  id: ID!
+  fighter: Fighter!
+  weightClass: WeightClass!
+  points: Float!
+  wins: Float!
+  losses: Float!
+  draws: Float!
+  winPercentage: Float!
+  lastFightDate: DateTime!
+}
+
+type Query {
+  fighters: [Fighter!]!
+  events: [FightEvent!]!
+  event(id: String!): FightEvent!
+  rankings(weight: String): [Ranking!]!
+}
+
+type Mutation {
+  createFighter(input: CreateFighterInput!): Fighter!
+  createEvent(input: CreateEventInput!): FightEvent!
+  createFight(input: CreateFightInput!): Fight!
+}
+
+input CreateFighterInput {
+  firstName: String!
+  lastName: String!
+  nickname: String
+  birthDate: DateTime!
+  country: String!
+  weightClass: WeightClass!
+  heightCm: Int
+  reachCm: Int
+  gym: String
+}
+
+input CreateEventInput {
+  name: String!
+  location: String!
+  date: DateTime!
+}
+
+input CreateFightInput {
+  eventId: String!
+  fighterAId: String!
+  fighterBId: String!
+  method: FightResultType!
+  round: Int!
+  time: String!
+}

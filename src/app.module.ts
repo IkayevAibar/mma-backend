@@ -5,12 +5,14 @@ import { join } from 'path';
 import { FighterModule } from './modules/fighter/fighter.module';
 import { FightEventModule } from './modules/fight-event/fight-event.module';
 import { FightModule } from './modules/fight/fight.module';
-import { RankingService } from './modules/ranking/ranking.service';
-import { RankingResolver } from './modules/ranking/ranking.resolver';
 import { RankingModule } from './modules/ranking/ranking.module';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { EventEmitterModule } from '@nestjs/event-emitter';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOST,
@@ -23,15 +25,16 @@ import { RankingModule } from './modules/ranking/ranking.module';
       autoLoadEntities: true,
       migrations: [__dirname + '/migrations/*.{ts,js}'],
     }),
-    GraphQLModule.forRoot({
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'schema.gql'),
       playground: true,
     }),
+    EventEmitterModule.forRoot(),
     FighterModule,
     FightEventModule,
     FightModule,
     RankingModule,
   ],
-  providers: [RankingService, RankingResolver],
 })
 export class AppModule {}
